@@ -1,0 +1,75 @@
+/* ── Design tokens ─────────────────────────── */
+:root {
+  --color-bg:         #F7F5F2;
+  --color-surface:    #FFFFFF;
+  --color-border:     #E2DDD8;
+  --color-text:       #1A1A1A;
+  --color-text-muted: #6B6560;
+  --color-blue:       #1B6CA8;
+  --color-blue-dark:  #145585;
+  --color-orange:     #E8651A;
+  --color-orange-dark:#C5530F;
+  --color-sold:       #C0392B;
+  --color-sold-bg:    #FDECEA;
+
+  --font-ui:    'DM Sans', sans-serif;
+  --font-title: 'DM Serif Display', serif;
+
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.10);
+  --shadow-hover: 0 8px 32px rgba(0,0,0,0.15);
+
+  --transition: 200ms ease;
+}
+
+/* ── Reset ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-ui);
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+}
+img { max-width: 100%; display: block; }
+button { cursor: pointer; font-family: inherit; }
+a { color: inherit; text-decoration: none; }
+
+/* ── Header ────────────────────────────────── */
+.site-header {
+  background: var(--color-blue);
+  color: #fff;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+.site-title {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.02em;
+}
+.site-tagline {
+  margin-top: 0.4rem;
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+/* ── Sections ──────────────────────────────── */
+main { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+.section-title {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  color: var(--color-text);
+  margin-bottom: 1.25rem;
+}
+
+/* ── Footer ────────────────────────────────── */
+.site-footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--color-border);
+}
