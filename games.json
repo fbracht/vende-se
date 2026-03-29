@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "catan",
+    "nome": "Catan",
+    "preco": 180,
+    "condicao": "Excelente",
+    "jogadores": "3–4",
+    "duracao": "60–120 min",
+    "designer": "Klaus Teuber",
+    "ano": 1995,
+    "editora": "Devir",
+    "idade": "10+",
+    "descricao": "Cópia em ótimo estado, todas as peças presentes. Uma das melhores introduções ao hobby.",
+    "vendido": false
+  },
+  {
+    "slug": "wingspan",
+    "nome": "Wingspan",
+    "preco": 320,
+    "condicao": "Bom",
+    "jogadores": "1–5",
+    "duracao": "40–70 min",
+    "designer": "Elizabeth Hargrave",
+    "ano": 2019,
+    "editora": "Stonemaier Games",
+    "idade": "10+",
+    "descricao": "Jogo de cartas lindíssimo sobre pássaros. Acompanha expansão Europa.",
+    "vendido": false
+  },
+  {
+    "slug": "pandemic",
+    "nome": "Pandemic",
+    "preco": 150,
+    "condicao": "Bom",
+    "jogadores": "2–4",
+    "duracao": "45–60 min",
+    "designer": "Matt Leacock",
+    "ano": 2008,
+    "editora": "Devir",
+    "idade": "8+",
+    "descricao": "Clássico cooperativo. Ótima entrada para quem nunca jogou boardgames modernos.",
+    "vendido": true
+  }
+]
