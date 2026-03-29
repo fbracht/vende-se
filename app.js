@@ -41,6 +41,7 @@ function waLink(nome) {
 // ── Carousel render ────────────────────────────
 function renderCarousel() {
   const stage = document.getElementById('carousel-stage');
+  if (!games.length) return;
   const game = games[currentIndex];
   stage.innerHTML = buildCardHTML(game);
   updateArrows();
@@ -111,21 +112,17 @@ document.addEventListener('click', e => {
   if (e.target.closest('.carousel-arrow--prev') && currentIndex > 0) {
     currentIndex--;
     renderCarousel();
-  }
-  if (e.target.closest('.carousel-arrow--next') && currentIndex < games.length - 1) {
+  } else if (e.target.closest('.carousel-arrow--next') && currentIndex < games.length - 1) {
     currentIndex++;
     renderCarousel();
-  }
-  if (e.target.closest('.game-thumb')) {
+  } else if (e.target.closest('.game-thumb')) {
     const idx = parseInt(e.target.closest('.game-thumb').dataset.index, 10);
     currentIndex = idx;
     renderCarousel();
     document.querySelector('.carousel-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-  if (e.target.closest('#lightbox-close') || e.target.id === 'lightbox') {
+  } else if (e.target.closest('#lightbox-close') || e.target.id === 'lightbox') {
     closeLightbox();
-  }
-  if (e.target.closest('.gallery-thumb-btn')) {
+  } else if (e.target.closest('.gallery-thumb-btn')) {
     const btn = e.target.closest('.gallery-thumb-btn');
     openLightbox(btn.dataset.src, btn.dataset.idx);
   }
@@ -134,5 +131,5 @@ document.addEventListener('click', e => {
 // ── Stub functions (implemented in later tasks) ─
 function probeImages(slug) { /* Task 6 */ }
 function renderGamesList() { /* Task 7 */ }
-function openLightbox(src, alt) { /* Task 6 */ }
+function openLightbox(src, idx) { /* Task 6 */ }
 function closeLightbox() { /* Task 6 */ }
