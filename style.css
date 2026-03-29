@@ -75,3 +75,149 @@ main { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 4rem; }
   font-size: 0.9rem;
   border-top: 1px solid var(--color-border);
 }
+
+/* ── Carousel ──────────────────────────────── */
+.carousel-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.carousel-stage {
+  flex: 1;
+  min-width: 0;
+}
+.carousel-arrow {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: 1.25rem;
+  color: var(--color-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+.carousel-arrow:hover:not(:disabled) {
+  background: var(--color-blue);
+  border-color: var(--color-blue);
+  color: #fff;
+}
+.carousel-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ── Game Card ─────────────────────────────── */
+.game-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  padding: 2rem;
+  position: relative;
+}
+.card-counter {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+.card-group {
+  margin-bottom: 1.25rem;
+}
+.game-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+.game-headline-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.game-price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-orange);
+}
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.65em;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.badge--condition {
+  background: #EAF3FB;
+  color: var(--color-blue);
+}
+.badge--sold {
+  background: var(--color-sold-bg);
+  color: var(--color-sold);
+}
+.card-group--play {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.play-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.play-icon { font-size: 1rem; }
+.card-group--meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+.meta-item::after { content: '·'; margin-left: 0.75rem; }
+.meta-item:last-child::after { content: ''; margin-left: 0; }
+.game-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border);
+  padding-top: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1.25rem;
+}
+.card-cta { margin-top: 1.5rem; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  transition: var(--transition);
+}
+.btn--whatsapp {
+  background: #25D366;
+  color: #fff;
+}
+.btn--whatsapp:hover:not(:disabled) {
+  background: #1ebe5d;
+  transform: translateY(-1px);
+}
+.btn--whatsapp:disabled {
+  background: var(--color-border);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
