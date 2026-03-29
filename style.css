@@ -110,6 +110,10 @@ main { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 4rem; }
   opacity: 0.3;
   cursor: not-allowed;
 }
+.carousel-arrow:focus-visible {
+  outline: 3px solid var(--color-blue);
+  outline-offset: 2px;
+}
 
 /* ── Game Card ─────────────────────────────── */
 .game-card {
@@ -220,4 +224,8 @@ main { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 4rem; }
   background: var(--color-border);
   color: var(--color-text-muted);
   cursor: not-allowed;
+}
+.btn--whatsapp:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
 }
