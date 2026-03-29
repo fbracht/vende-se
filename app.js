@@ -128,6 +128,23 @@ document.addEventListener('click', e => {
   }
 });
 
+// ── Swipe gestures ─────────────────────────────
+(function initSwipe() {
+  let startX = 0;
+  const stage = document.getElementById('carousel-stage');
+
+  stage.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  stage.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) < 40) return;
+    if (dx < 0 && currentIndex < games.length - 1) { currentIndex++; renderCarousel(); }
+    if (dx > 0 && currentIndex > 0) { currentIndex--; renderCarousel(); }
+  }, { passive: true });
+})();
+
 // ── Stub functions (implemented in later tasks) ─
 function probeImages(slug) { /* Task 6 */ }
 function renderGamesList() { /* Task 7 */ }
