@@ -19,11 +19,11 @@
 
   <main>
     <section class="carousel-section" aria-label="Jogos em destaque">
-      <button class="carousel-arrow carousel-arrow--prev" aria-label="Jogo anterior">&#8592;</button>
+      <button class="carousel-arrow carousel-arrow--prev" type="button" aria-label="Jogo anterior">&#8592;</button>
       <div class="carousel-stage" id="carousel-stage">
         <!-- Game card injected by JS -->
       </div>
-      <button class="carousel-arrow carousel-arrow--next" aria-label="Próximo jogo">&#8594;</button>
+      <button class="carousel-arrow carousel-arrow--next" type="button" aria-label="Próximo jogo">&#8594;</button>
     </section>
 
     <section class="games-list-section" aria-label="Todos os jogos">
@@ -39,10 +39,10 @@
   </footer>
 
   <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagem ampliada" hidden>
-    <button class="lightbox-close" id="lightbox-close" aria-label="Fechar">&#x2715;</button>
+  <dialog class="lightbox" id="lightbox" aria-label="Imagem ampliada">
+    <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Fechar">&#x2715;</button>
     <img class="lightbox-img" id="lightbox-img" src="" alt="" />
-  </div>
+  </dialog>
 
   <!-- WhatsApp floating button -->
   <a class="whatsapp-float" href="https://wa.me/5535997491542" target="_blank" rel="noopener" aria-label="Fale comigo no WhatsApp">
