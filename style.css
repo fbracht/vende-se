@@ -1,5 +1,6 @@
 /* ── Design tokens ─────────────────────────── */
 :root {
+  color-scheme: light;
   --color-bg:         #F7F5F2;
   --color-surface:    #FFFFFF;
   --color-border:     #E2DDD8;
@@ -22,7 +23,7 @@
   --shadow-card: 0 4px 24px rgba(0,0,0,0.10);
   --shadow-hover: 0 8px 32px rgba(0,0,0,0.15);
 
-  --transition: 200ms ease;
+  --transition: all 200ms ease;
 }
 
 /* ── Reset ─────────────────────────────────── */
@@ -32,10 +33,11 @@ body {
   font-family: var(--font-ui);
   background: var(--color-bg);
   color: var(--color-text);
+  line-height: 1.5;
   min-height: 100vh;
 }
 img { max-width: 100%; display: block; }
-button { cursor: pointer; font-family: inherit; }
+button { cursor: pointer; font-family: inherit; background: none; border: none; }
 a { color: inherit; text-decoration: none; }
 
 /* ── Header ────────────────────────────────── */
