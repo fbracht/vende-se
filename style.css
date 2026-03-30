@@ -229,3 +229,68 @@ main { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 4rem; }
   outline: 3px solid #fff;
   outline-offset: 2px;
 }
+
+/* ── Gallery ───────────────────────────────── */
+.game-gallery { margin-top: 1.5rem; }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 0.5rem;
+}
+.gallery-thumb-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  aspect-ratio: 1;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.gallery-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gallery-thumb-btn:hover { opacity: 0.85; transform: scale(1.03); }
+.gallery-thumb-btn:focus-visible {
+  outline: 3px solid var(--color-blue);
+  outline-offset: 2px;
+}
+
+/* ── Lightbox ──────────────────────────────── */
+.lightbox {
+  border: none;
+  background: transparent;
+  padding: 0;
+  max-width: 100vw;
+  max-height: 100vh;
+}
+.lightbox::backdrop {
+  background: rgba(0,0,0,0.88);
+}
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  display: block;
+}
+.lightbox-close {
+  position: fixed;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.75rem;
+  line-height: 1;
+  opacity: 0.75;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.lightbox-close:hover { opacity: 1; }
+.lightbox-close:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}

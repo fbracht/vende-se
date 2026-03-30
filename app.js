@@ -146,7 +146,71 @@ document.addEventListener('click', e => {
 })();
 
 // ── Stub functions (implemented in later tasks) ─
-function probeImages(slug) { /* Task 6 */ }
 function renderGamesList() { /* Task 7 */ }
-function openLightbox(src, idx) { /* Task 6 */ }
-function closeLightbox() { /* Task 6 */ }
+
+// ── Image gallery ──────────────────────────────
+async function probeImages(slug) {
+  const gallery = document.getElementById(`gallery-${slug}`);
+  if (!gallery) return;
+
+  const found = [];
+  for (let i = 1; i <= 20; i++) {
+    const src = `jogos/${encodeURIComponent(slug)}/${i}.jpg`;
+    const ok = await imageExists(src);
+    if (!ok) break;
+    found.push(src);
+  }
+
+  if (found.length === 0) return;
+
+  const grid = document.createElement('div');
+  grid.className = 'gallery-grid';
+
+  found.forEach((src, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'gallery-thumb-btn';
+    btn.type = 'button';
+    btn.dataset.src = src;
+    btn.dataset.idx = String(idx);
+    btn.setAttribute('aria-label', `Ver imagem ${idx + 1}`);
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = `Imagem ${idx + 1} de ${escapeHTML(slug)}`;
+    img.loading = 'lazy';
+
+    btn.appendChild(img);
+    grid.appendChild(btn);
+  });
+
+  gallery.appendChild(grid);
+}
+
+function imageExists(src) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload  = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = src;
+  });
+}
+
+// ── Lightbox ───────────────────────────────────
+function openLightbox(src, idx) {
+  const lb  = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src;
+  img.alt = `Imagem ${parseInt(idx, 10) + 1}`;
+  lb.showModal();
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').close();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const lb = document.getElementById('lightbox');
+    if (lb.open) lb.close();
+  }
+});
