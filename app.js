@@ -18,8 +18,7 @@ async function init() {
   try {
     const res = await fetch('games.json');
     games = await res.json();
-    renderCarousel();
-    renderGamesList();
+    await Promise.all([renderCarousel(), renderGamesList()]);
   } catch (e) {
     document.getElementById('carousel-stage').innerHTML =
       '<p style="padding:2rem;text-align:center;color:var(--color-text-muted)">Erro ao carregar jogos.</p>';
@@ -187,21 +186,42 @@ document.addEventListener('click', e => {
 })();
 
 // ── Games list ─────────────────────────────────
-function renderGamesList() {
+async function renderGamesList() {
   const grid = document.getElementById('games-grid');
   if (!grid) return;
 
+  const boxArts = await Promise.all(
+    games.map(g => imageExists(`jogos/${encodeURIComponent(g.slug)}/1.jpg`)
+      .then(ok => ok ? `jogos/${encodeURIComponent(g.slug)}/1.jpg` : null)
+    )
+  );
+
   grid.innerHTML = '';
   games.forEach((g, i) => {
+    const boxArt = boxArts[i];
+
     const btn = document.createElement('button');
     btn.className = [
       'game-thumb',
+      boxArt ? 'game-thumb--with-art' : '',
       g.vendido ? 'game-thumb--sold' : '',
       i === currentIndex ? 'game-thumb--active' : ''
     ].filter(Boolean).join(' ');
     btn.type = 'button';
     btn.dataset.index = String(i);
     btn.setAttribute('aria-label', g.nome + (g.vendido ? ' (Vendido)' : ''));
+
+    if (boxArt) {
+      const artDiv = document.createElement('div');
+      artDiv.className = 'thumb-art';
+      const img = document.createElement('img');
+      img.src = boxArt;
+      img.alt = '';
+      img.setAttribute('aria-hidden', 'true');
+      img.loading = 'lazy';
+      artDiv.appendChild(img);
+      btn.appendChild(artDiv);
+    }
 
     const nameSpan = document.createElement('span');
     nameSpan.className = 'game-thumb-name';
