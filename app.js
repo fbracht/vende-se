@@ -39,20 +39,21 @@ function waLink(nome) {
 }
 
 // ── Carousel render ────────────────────────────
-function renderCarousel() {
+async function renderCarousel() {
   const stage = document.getElementById('carousel-stage');
   if (!games.length) return;
   const game = games[currentIndex];
-  stage.innerHTML = buildCardHTML(game);
+  const { boxArt, gallery } = await probeImages(game.slug);
+  stage.innerHTML = buildCardHTML(game, boxArt);
+  renderGallery(game.slug, gallery);
   updateArrows();
-  probeImages(game.slug);
   // Refresh active thumb in games list
   document.querySelectorAll('.game-thumb').forEach((el, i) => {
     el.classList.toggle('game-thumb--active', i === currentIndex);
   });
 }
 
-function buildCardHTML(game) {
+function buildCardHTML(game, boxArt = null) {
   const e = escapeHTML;
 
   const soldBadge = game.vendido
@@ -70,36 +71,71 @@ function buildCardHTML(game) {
     ? `<button class="btn btn--whatsapp" type="button" disabled>Vendido</button>`
     : `<a class="btn btn--whatsapp" href="${e(waLink(game.nome))}" target="_blank" rel="noopener">Tenho interesse!</a>`;
 
+  const boxArtCol = boxArt
+    ? `<div class="card-box-art"><img src="${e(boxArt)}" alt="Box art de ${e(game.nome)}" loading="lazy" /></div>`
+    : '';
+
   return `
-    <article class="game-card" data-slug="${e(game.slug)}">
+    <article class="game-card${boxArt ? ' game-card--with-art' : ''}" data-slug="${e(game.slug)}">
       <div class="card-counter">${currentIndex + 1} / ${games.length}</div>
 
-      <div class="card-group card-group--headline">
-        <h2 class="game-title">${e(game.nome)}</h2>
-        <div class="game-headline-meta">
-          <span class="game-price">${formatPrice(game.preco)}</span>
-          ${soldBadge}
+      <div class="card-meta">
+        <div class="card-group card-group--headline">
+          <h2 class="game-title">${e(game.nome)}</h2>
+          <div class="game-headline-meta">
+            <span class="game-price">${formatPrice(game.preco)}</span>
+            ${soldBadge}
+          </div>
+        </div>
+
+        <div class="card-group card-group--play">
+          ${game.jogadores ? `<span class="play-item"><span class="play-icon" aria-hidden="true">👥</span>${e(game.jogadores)} jogadores</span>` : ''}
+          ${game.duracao   ? `<span class="play-item"><span class="play-icon" aria-hidden="true">⏱</span>${e(game.duracao)}</span>` : ''}
+        </div>
+
+        ${metaFields ? `<div class="card-group card-group--meta">${metaFields}</div>` : ''}
+
+        ${game.descricao ? `<p class="game-description">${e(game.descricao)}</p>` : ''}
+
+        <div class="game-gallery" id="gallery-${e(game.slug)}">
+          <!-- images injected by renderGallery() -->
+        </div>
+
+        <div class="card-cta">
+          ${ctaBtn}
         </div>
       </div>
 
-      <div class="card-group card-group--play">
-        ${game.jogadores ? `<span class="play-item"><span class="play-icon" aria-hidden="true">👥</span>${e(game.jogadores)} jogadores</span>` : ''}
-        ${game.duracao   ? `<span class="play-item"><span class="play-icon" aria-hidden="true">⏱</span>${e(game.duracao)}</span>` : ''}
-      </div>
-
-      ${metaFields ? `<div class="card-group card-group--meta">${metaFields}</div>` : ''}
-
-      ${game.descricao ? `<p class="game-description">${e(game.descricao)}</p>` : ''}
-
-      <div class="game-gallery" id="gallery-${e(game.slug)}">
-        <!-- images injected by probeImages() -->
-      </div>
-
-      <div class="card-cta">
-        ${ctaBtn}
-      </div>
+      ${boxArtCol}
     </article>
   `;
+}
+
+function renderGallery(slug, images) {
+  const container = document.getElementById(`gallery-${slug}`);
+  if (!container || images.length === 0) return;
+
+  const grid = document.createElement('div');
+  grid.className = 'gallery-grid';
+
+  images.forEach((src, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'gallery-thumb-btn';
+    btn.type = 'button';
+    btn.dataset.src = src;
+    btn.dataset.idx = String(idx);
+    btn.setAttribute('aria-label', `Ver imagem ${idx + 1}`);
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = `Imagem ${idx + 1} de ${escapeHTML(slug)}`;
+    img.loading = 'lazy';
+
+    btn.appendChild(img);
+    grid.appendChild(btn);
+  });
+
+  container.appendChild(grid);
 }
 
 function updateArrows() {
