@@ -425,46 +425,48 @@ main { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 4rem; }
 
 /* ── Box art: carousel card two-column layout ── */
 .game-card--with-art {
-  display: grid;
-  grid-template-columns: 1fr 200px;
-  gap: 2rem;
-  align-items: start;
+  overflow: visible;
+  padding-right: 11rem;
 }
 .card-meta {
   min-width: 0;
 }
 
-/* card-counter spans full width above the two columns */
+/* counter repositioned as pill at bottom-center of card */
 .game-card--with-art .card-counter {
-  grid-column: 1 / -1;
-  position: static;
-  text-align: right;
-  margin-bottom: -0.75rem;
-  margin-top: -0.5rem;
+  position: absolute;
+  top: auto;
+  right: auto;
+  bottom: -0.85rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0.2em 0.85em;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: var(--shadow-card);
 }
 
 .card-box-art {
-  position: relative;
-  overflow: hidden;
+  position: absolute;
+  top: -1rem;
+  right: -1.5rem;
+  width: 200px;
   border-radius: var(--radius-md);
-  align-self: start;
-  margin-top: 0.25rem;
+  transform: rotate(4deg);
+  transform-origin: top right;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.32));
+  z-index: 1;
 }
 .card-box-art img {
   width: 100%;
   display: block;
   border-radius: var(--radius-md);
-}
-.card-box-art::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 55%,
-    var(--color-surface) 100%
-  );
-  pointer-events: none;
 }
 
 /* ── Box art: thumbnail cards ──────────────────── */
