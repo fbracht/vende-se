@@ -42,18 +42,23 @@ function waLink(nome) {
 async function renderCarousel() {
   const stage = document.getElementById('carousel-stage');
   if (!games.length) return;
-  const game = games[currentIndex];
+  const index = currentIndex;
+  const game = games[index];
+
   const { boxArt, gallery } = await probeImages(game.slug);
-  stage.innerHTML = buildCardHTML(game, boxArt);
-  renderGallery(game.slug, gallery);
+  if (currentIndex !== index) return;
+
+  stage.innerHTML = buildCardHTML(game, boxArt, index);
   updateArrows();
+  renderGallery(game.slug, gallery);
+
   // Refresh active thumb in games list
   document.querySelectorAll('.game-thumb').forEach((el, i) => {
-    el.classList.toggle('game-thumb--active', i === currentIndex);
+    el.classList.toggle('game-thumb--active', i === index);
   });
 }
 
-function buildCardHTML(game, boxArt = null) {
+function buildCardHTML(game, boxArt = null, index = currentIndex) {
   const e = escapeHTML;
 
   const soldBadge = game.vendido
@@ -77,7 +82,7 @@ function buildCardHTML(game, boxArt = null) {
 
   return `
     <article class="game-card${boxArt ? ' game-card--with-art' : ''}" data-slug="${e(game.slug)}">
-      <div class="card-counter">${currentIndex + 1} / ${games.length}</div>
+      <div class="card-counter">${index + 1} / ${games.length}</div>
 
       <div class="card-meta">
         <div class="card-group card-group--headline">
