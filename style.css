@@ -294,6 +294,29 @@ main { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 4rem; }
   outline: 3px solid #fff;
   outline-offset: 4px;
 }
+.lightbox-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  font-size: 1.75rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.75;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.lightbox-arrow--prev { left: 1rem; }
+.lightbox-arrow--next { right: 1rem; }
+.lightbox-arrow:hover:not(:disabled) { opacity: 1; background: rgba(255,255,255,0.28); }
+.lightbox-arrow:disabled { opacity: 0.2; cursor: not-allowed; }
+.lightbox-arrow:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
 
 /* ── Games list grid ───────────────────────── */
 .games-list-section { margin-top: 3rem; }

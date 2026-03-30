@@ -12,6 +12,8 @@ function escapeHTML(str) {
 // ── State ──────────────────────────────────────
 let games = [];
 let currentIndex = 0;
+let lightboxImages = [];
+let lightboxIndex = 0;
 
 // ── Boot ───────────────────────────────────────
 async function init() {
@@ -128,6 +130,7 @@ function renderGallery(slug, images) {
     btn.type = 'button';
     btn.dataset.src = src;
     btn.dataset.idx = String(idx);
+    btn.dataset.images = JSON.stringify(images);
     btn.setAttribute('aria-label', `Ver imagem ${idx + 1}`);
 
     const img = document.createElement('img');
@@ -162,9 +165,13 @@ document.addEventListener('click', e => {
     document.querySelector('.carousel-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
   } else if (e.target.closest('#lightbox-close') || e.target.id === 'lightbox') {
     closeLightbox();
+  } else if (e.target.closest('#lightbox-prev')) {
+    lightboxNavigate(-1);
+  } else if (e.target.closest('#lightbox-next')) {
+    lightboxNavigate(+1);
   } else if (e.target.closest('.gallery-thumb-btn')) {
     const btn = e.target.closest('.gallery-thumb-btn');
-    openLightbox(btn.dataset.src, btn.dataset.idx);
+    openLightbox(btn.dataset.src, btn.dataset.idx, JSON.parse(btn.dataset.images));
   }
 });
 
@@ -267,12 +274,29 @@ function imageExists(src) {
 }
 
 // ── Lightbox ───────────────────────────────────
-function openLightbox(src, idx) {
-  const lb  = document.getElementById('lightbox');
-  const img = document.getElementById('lightbox-img');
-  img.src = src;
-  img.alt = `Imagem ${parseInt(idx, 10) + 1}`;
+function openLightbox(src, idx, images) {
+  lightboxImages = images || [src];
+  lightboxIndex  = parseInt(idx, 10);
+  const lb = document.getElementById('lightbox');
+  updateLightboxImage();
   lb.showModal();
+}
+
+function updateLightboxImage() {
+  const img  = document.getElementById('lightbox-img');
+  const prev = document.getElementById('lightbox-prev');
+  const next = document.getElementById('lightbox-next');
+  img.src = lightboxImages[lightboxIndex];
+  img.alt = `Imagem ${lightboxIndex + 1} de ${lightboxImages.length}`;
+  prev.disabled = lightboxIndex === 0;
+  next.disabled = lightboxIndex === lightboxImages.length - 1;
+}
+
+function lightboxNavigate(dir) {
+  const newIdx = lightboxIndex + dir;
+  if (newIdx < 0 || newIdx >= lightboxImages.length) return;
+  lightboxIndex = newIdx;
+  updateLightboxImage();
 }
 
 function closeLightbox() {
@@ -280,8 +304,9 @@ function closeLightbox() {
 }
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    const lb = document.getElementById('lightbox');
-    if (lb.open) lb.close();
-  }
+  const lb = document.getElementById('lightbox');
+  if (!lb.open) return;
+  if (e.key === 'Escape') lb.close();
+  if (e.key === 'ArrowLeft')  lightboxNavigate(-1);
+  if (e.key === 'ArrowRight') lightboxNavigate(+1);
 });
