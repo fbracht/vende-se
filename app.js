@@ -229,7 +229,7 @@ async function renderGamesList() {
 
     const priceSpan = document.createElement('span');
     priceSpan.className = 'game-thumb-price';
-    priceSpan.textContent = g.vendido ? 'Vendido' : `R\u00a0${g.preco}`;
+    priceSpan.textContent = g.vendido ? 'Vendido' : `R$\u00a0${g.preco}`;
 
     btn.appendChild(nameSpan);
     btn.appendChild(priceSpan);
