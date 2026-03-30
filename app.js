@@ -178,40 +178,19 @@ function renderGamesList() {
 
 // ── Image gallery ──────────────────────────────
 async function probeImages(slug) {
-  const gallery = document.getElementById(`gallery-${slug}`);
-  if (!gallery) return;
+  const boxArtSrc = `jogos/${encodeURIComponent(slug)}/1.jpg`;
+  const hasBoxArt = await imageExists(boxArtSrc);
+  const boxArt = hasBoxArt ? boxArtSrc : null;
 
-  const found = [];
-  for (let i = 1; i <= 20; i++) {
+  const gallery = [];
+  for (let i = 2; i <= 20; i++) {
     const src = `jogos/${encodeURIComponent(slug)}/${i}.jpg`;
     const ok = await imageExists(src);
     if (!ok) break;
-    found.push(src);
+    gallery.push(src);
   }
 
-  if (found.length === 0) return;
-
-  const grid = document.createElement('div');
-  grid.className = 'gallery-grid';
-
-  found.forEach((src, idx) => {
-    const btn = document.createElement('button');
-    btn.className = 'gallery-thumb-btn';
-    btn.type = 'button';
-    btn.dataset.src = src;
-    btn.dataset.idx = String(idx);
-    btn.setAttribute('aria-label', `Ver imagem ${idx + 1}`);
-
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = `Imagem ${idx + 1} de ${escapeHTML(slug)}`;
-    img.loading = 'lazy';
-
-    btn.appendChild(img);
-    grid.appendChild(btn);
-  });
-
-  gallery.appendChild(grid);
+  return { boxArt, gallery };
 }
 
 function imageExists(src) {
