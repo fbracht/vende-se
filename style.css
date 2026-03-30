@@ -337,3 +337,55 @@ main { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 4rem; }
   outline: 3px solid var(--color-blue);
   outline-offset: 2px;
 }
+
+/* ── WhatsApp float ────────────────────────── */
+.whatsapp-float {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #25D366;
+  color: #fff;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: 2rem;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+  transition: var(--transition);
+}
+.whatsapp-float:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(37,211,102,0.5);
+}
+.whatsapp-float:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+/* ── Mobile ────────────────────────────────── */
+@media (max-width: 600px) {
+  main { padding: 1.25rem 0.75rem 5rem; }
+
+  .carousel-section { gap: 0.5rem; }
+  .carousel-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .game-card { padding: 1.25rem 1rem; }
+  .card-counter { top: 1rem; right: 1rem; }
+
+  .card-group--play { gap: 1rem; }
+
+  .games-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .whatsapp-float span { display: none; }
+}
