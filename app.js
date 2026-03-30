@@ -145,8 +145,36 @@ document.addEventListener('click', e => {
   }, { passive: true });
 })();
 
-// ── Stub functions (implemented in later tasks) ─
-function renderGamesList() { /* Task 7 */ }
+// ── Games list ─────────────────────────────────
+function renderGamesList() {
+  const grid = document.getElementById('games-grid');
+  if (!grid) return;
+
+  grid.innerHTML = '';
+  games.forEach((g, i) => {
+    const btn = document.createElement('button');
+    btn.className = [
+      'game-thumb',
+      g.vendido ? 'game-thumb--sold' : '',
+      i === currentIndex ? 'game-thumb--active' : ''
+    ].filter(Boolean).join(' ');
+    btn.type = 'button';
+    btn.dataset.index = String(i);
+    btn.setAttribute('aria-label', g.nome + (g.vendido ? ' (Vendido)' : ''));
+
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'game-thumb-name';
+    nameSpan.textContent = g.nome;
+
+    const priceSpan = document.createElement('span');
+    priceSpan.className = 'game-thumb-price';
+    priceSpan.textContent = g.vendido ? 'Vendido' : `R\u00a0${g.preco}`;
+
+    btn.appendChild(nameSpan);
+    btn.appendChild(priceSpan);
+    grid.appendChild(btn);
+  });
+}
 
 // ── Image gallery ──────────────────────────────
 async function probeImages(slug) {

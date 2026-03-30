@@ -294,3 +294,46 @@ main { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 4rem; }
   outline: 3px solid #fff;
   outline-offset: 4px;
 }
+
+/* ── Games list grid ───────────────────────── */
+.games-list-section { margin-top: 3rem; }
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+.game-thumb {
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  text-align: left;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.game-thumb:hover {
+  border-color: var(--color-blue);
+  box-shadow: var(--shadow-hover);
+}
+.game-thumb--active {
+  border-color: var(--color-blue);
+  background: #EAF3FB;
+}
+.game-thumb--sold { opacity: 0.5; }
+.game-thumb-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+.game-thumb-price {
+  font-size: 0.8rem;
+  color: var(--color-orange);
+  font-weight: 600;
+}
+.game-thumb--sold .game-thumb-price { color: var(--color-sold); }
+.game-thumb:focus-visible {
+  outline: 3px solid var(--color-blue);
+  outline-offset: 2px;
+}
