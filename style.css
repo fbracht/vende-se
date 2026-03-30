@@ -426,7 +426,7 @@ main { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 4rem; }
 /* ── Box art: carousel card two-column layout ── */
 .game-card--with-art {
   overflow: visible;
-  padding-right: 11rem;
+  padding-right: 16rem;
 }
 .card-meta {
   min-width: 0;
@@ -456,17 +456,22 @@ main { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 4rem; }
   position: absolute;
   top: -1rem;
   right: -1.5rem;
-  width: 200px;
-  border-radius: var(--radius-md);
+  width: 260px;
+  border-radius: 4px;
   transform: rotate(4deg);
   transform-origin: top right;
   filter: drop-shadow(0 8px 24px rgba(0,0,0,0.32));
+  transition: transform 280ms ease, filter 280ms ease;
   z-index: 1;
+}
+.card-box-art:hover {
+  transform: rotate(0deg) scale(1.05);
+  filter: drop-shadow(0 12px 32px rgba(0,0,0,0.38));
 }
 .card-box-art img {
   width: 100%;
   display: block;
-  border-radius: var(--radius-md);
+  border-radius: 4px;
 }
 
 /* ── Box art: thumbnail cards ──────────────────── */
