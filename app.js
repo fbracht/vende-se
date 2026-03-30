@@ -191,9 +191,7 @@ async function renderGamesList() {
   if (!grid) return;
 
   const boxArts = await Promise.all(
-    games.map(g => imageExists(`jogos/${encodeURIComponent(g.slug)}/1.jpg`)
-      .then(ok => ok ? `jogos/${encodeURIComponent(g.slug)}/1.jpg` : null)
-    )
+    games.map(g => probeImageSrc(g.slug, 1))
   );
 
   grid.innerHTML = '';
@@ -238,16 +236,21 @@ async function renderGamesList() {
 }
 
 // ── Image gallery ──────────────────────────────
+async function probeImageSrc(slug, n) {
+  for (const ext of ['jpg', 'jpeg']) {
+    const src = `jogos/${encodeURIComponent(slug)}/${n}.${ext}`;
+    if (await imageExists(src)) return src;
+  }
+  return null;
+}
+
 async function probeImages(slug) {
-  const boxArtSrc = `jogos/${encodeURIComponent(slug)}/1.jpg`;
-  const hasBoxArt = await imageExists(boxArtSrc);
-  const boxArt = hasBoxArt ? boxArtSrc : null;
+  const boxArt = await probeImageSrc(slug, 1);
 
   const gallery = [];
   for (let i = 2; i <= 20; i++) {
-    const src = `jogos/${encodeURIComponent(slug)}/${i}.jpg`;
-    const ok = await imageExists(src);
-    if (!ok) break;
+    const src = await probeImageSrc(slug, i);
+    if (!src) break;
     gallery.push(src);
   }
 
