@@ -162,8 +162,29 @@ main { max-width: 960px; margin: 0 auto; padding: 3.5rem 1rem 4rem; }
   letter-spacing: 0.04em;
 }
 .badge--condition {
-  background: #EAF3FB;
-  color: var(--color-blue);
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1.5px solid var(--color-border);
+}
+
+.condition-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.stars-label {
+  font-size: 0.7em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.stars-icons {
+  color: var(--color-orange);
+  font-size: 1em;
+  letter-spacing: 0.05em;
 }
 .badge--sold {
   background: var(--color-sold-bg);
