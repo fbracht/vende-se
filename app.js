@@ -35,6 +35,15 @@ function formatPrice(n) {
   return `R$\u00a0${escapeHTML(String(n))}`;
 }
 
+function starsHTML(n) {
+  const filled = '★'.repeat(n);
+  const empty  = '☆'.repeat(5 - n);
+  return `<span class="condition-stars" aria-label="Estado de conservação: ${n} de 5 estrelas">`
+       + `<span class="stars-label">Estado</span>`
+       + `<span class="stars-icons" aria-hidden="true">${filled}${empty}</span>`
+       + `</span>`;
+}
+
 function waLink(nome) {
   const msg = encodeURIComponent(`Olá, tenho interesse em ${nome}!`);
   return `https://wa.me/5535997491542?text=${msg}`;
@@ -65,7 +74,7 @@ function buildCardHTML(game, boxArt = null, index = currentIndex) {
 
   const soldBadge = game.vendido
     ? `<span class="badge badge--sold">Vendido</span>`
-    : `<span class="badge badge--condition">${e(game.condicao)}</span>`;
+    : `<span class="badge badge--condition">${starsHTML(game.estrelas)}</span>`;
 
   const metaFields = [
     game.designer && `<span class="meta-item">${e(game.designer)}</span>`,
