@@ -39,7 +39,7 @@
     "editora": "Bézier Games",
     "idade": "14+",
     "descricao": "Edição em inglês. Leves avarias na caixa.",
-    "vendido": false
+    "vendido": true
   },
   {
     "slug": "enseada",
@@ -221,7 +221,7 @@
     "editora": "Days of Wonder",
     "idade": "8+",
     "descricao": "Acompanha expansão 1912 comprada na Shoppee. Caixa com aspecto de velha.",
-    "vendido": false
+    "vendido": true
   },
   {
     "slug": "tobago",
@@ -249,7 +249,7 @@
     "editora": "AEG",
     "idade": "8+",
     "descricao": "Edição em inglês. Jogo de coleção de conjuntos rápido e divertido com temática de chocolates e jogabilidade inspirada em Poker.",
-    "vendido": false
+    "vendido": true
   },
   {
     "slug": "under-falling-skies",
