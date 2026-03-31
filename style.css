@@ -377,7 +377,7 @@ main { max-width: 960px; margin: 0 auto; padding: 3.5rem 1rem 4rem; }
   transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
 }
-.game-thumb--sold { opacity: 0.5; }
+.game-thumb--sold { opacity: 0.35; filter: grayscale(0.8); }
 .game-thumb-name {
   font-weight: 700;
   font-size: 0.9rem;
