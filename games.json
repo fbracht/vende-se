@@ -11,7 +11,7 @@
     "editora": "Repos Production",
     "idade": "10+",
     "descricao": "Caixa levemente avariada.",
-    "vendido": false
+    "vendido": true
   },
   {
     "slug": "ilha-tesouro",
@@ -53,7 +53,7 @@
     "editora": "Meeple BR",
     "idade": "12+",
     "descricao": "Edição em Português. Acompanha a expansão Depósito Secreto.",
-    "vendido": false
+    "vendido": true
   },
   {
     "slug": "everdell",
@@ -67,7 +67,7 @@
     "editora": "Starling Games",
     "idade": "13+",
     "descricao": "Jogo de colocação de trabalhadores e construção de cidade com componentes deslumbrantes.",
-    "vendido": false
+    "vendido": true
   },
   {
     "slug": "fort",
@@ -179,7 +179,7 @@
     "editora": "Allplay",
     "idade": "11+",
     "descricao": "Edição em inglês. Jogo de vaza cooperativo para 2 jogadores.",
-    "vendido": false
+    "vendido": true
   },
   {
     "slug": "sleeping-gods",
