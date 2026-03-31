@@ -36,9 +36,10 @@ function formatPrice(n) {
 }
 
 function starsHTML(n) {
-  const filled = '★'.repeat(n);
-  const empty  = '☆'.repeat(5 - n);
-  return `<span class="condition-stars" aria-label="Estado de conservação: ${n} de 5 estrelas">`
+  const count = Number.isInteger(n) && n >= 1 && n <= 5 ? n : 0;
+  const filled = '★'.repeat(count);
+  const empty  = '☆'.repeat(5 - count);
+  return `<span class="condition-stars" aria-label="Estado de conservação: ${count} de 5 estrelas">`
        + `<span class="stars-label">Estado</span>`
        + `<span class="stars-icons" aria-hidden="true">${filled}${empty}</span>`
        + `</span>`;
