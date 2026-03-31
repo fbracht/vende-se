@@ -15,16 +15,34 @@ let currentIndex = 0;
 let lightboxImages = [];
 let lightboxIndex = 0;
 
+// ── Image cache ────────────────────────────────
+// Maps slug → Promise<{ boxArt, gallery }>
+// Storing the Promise (not just the result) ensures concurrent requests
+// for the same slug reuse the same in-flight fetch instead of duplicating it.
+const imageCachePromises = {};
+
 // ── Boot ───────────────────────────────────────
 async function init() {
   try {
     const res = await fetch('games.json');
     games = await res.json();
     await Promise.all([renderCarousel(), renderGamesList()]);
+    prefetchAllGames();
   } catch (e) {
     document.getElementById('carousel-stage').innerHTML =
-      '<p style="padding:2rem;text-align:center;color:var(--color-text-muted)">Erro ao carregar jogos.</p>';
+      '<p style="padding:2rem;text-align:center;color:var(--color-text-muted)">Erro ao carregar jogos.</p>'; // eslint-disable-line
   }
+}
+
+function prefetchAllGames() {
+  games.forEach(g => cachedProbeImages(g.slug));
+}
+
+function cachedProbeImages(slug) {
+  if (!imageCachePromises[slug]) {
+    imageCachePromises[slug] = probeImages(slug);
+  }
+  return imageCachePromises[slug];
 }
 
 document.addEventListener('DOMContentLoaded', init);
@@ -57,7 +75,13 @@ async function renderCarousel() {
   const index = currentIndex;
   const game = games[index];
 
-  const { boxArt, gallery } = await probeImages(game.slug);
+  // Show loading indicator only if images aren't cached yet
+  const cached = imageCachePromises[game.slug];
+  if (!cached) {
+    stage.innerHTML = '<div class="card-loading"><div class="card-loading-spinner"></div></div>';
+  }
+
+  const { boxArt, gallery } = await cachedProbeImages(game.slug);
   if (currentIndex !== index) return;
 
   stage.innerHTML = buildCardHTML(game, boxArt, index);
