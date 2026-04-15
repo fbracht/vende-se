@@ -39,7 +39,7 @@
     "editora": "Bézier Games",
     "idade": "14+",
     "descricao": "Edição em inglês. Leves avarias na caixa.",
-    "vendido": true
+    "vendido": false
   },
   {
     "slug": "enseada",
@@ -53,7 +53,7 @@
     "editora": "Meeple BR",
     "idade": "12+",
     "descricao": "Edição em Português. Acompanha a expansão Depósito Secreto.",
-    "vendido": true
+    "vendido": false
   },
   {
     "slug": "everdell",
@@ -165,7 +165,7 @@
     "editora": "Czech Games Edition",
     "idade": "12+",
     "descricao": "Jogo base em Português. Acompanha 2 expansões em inglês (Expedition Leaders e Lost Expedition) + PnP da expansão da campanha solo.",
-    "vendido": false
+    "vendido": true
   },
   {
     "slug": "sail",
@@ -207,7 +207,7 @@
     "editora": "Fantasy Flight Games",
     "idade": "12+",
     "descricao": "Jogo de deckbuilding para 2 jogadores no universo Star Wars.",
-    "vendido": false
+    "vendido": true
   },
   {
     "slug": "ticket-to-ride-europe",
@@ -221,7 +221,7 @@
     "editora": "Days of Wonder",
     "idade": "8+",
     "descricao": "Acompanha expansão 1912 comprada na Shoppee. Caixa com aspecto de velha.",
-    "vendido": true
+    "vendido": false
   },
   {
     "slug": "tobago",
